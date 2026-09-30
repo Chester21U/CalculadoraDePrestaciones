@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Calculadora de prestaciones laborales y recargos según la legislación laboral de El Salvador: renuncia voluntaria, despido injustificado, vacación, aguinaldo, horas extras, asuetos y descanso semanal.">
+  <meta name="theme-color" content="#101A4D">
+  <title>Calculadora de Prestaciones Laborales | El Salvador</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23101A4D'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='38' fill='%23fff' text-anchor='middle'%3E%C2%A7%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <a class="saltar" href="#contenido" data-saltar>Saltar al contenido</a>
+
+  <header class="barra-movil no-imprimir">
+    <a class="marca marca--movil" href="#inicio">
+      <span class="marca__sello" aria-hidden="true">§</span>
+      <span class="marca__nombre">Prestaciones laborales</span>
+    </a>
+    <button class="boton-menu" type="button" aria-controls="menu" aria-expanded="false" data-menu>
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <span>Menú</span>
+    </button>
+  </header>
+
+  <div class="velo no-imprimir" data-cerrar-menu></div>
+
+  <div class="app">
+    <nav class="lateral no-imprimir" id="menu" aria-label="Secciones de la aplicación">
+      <a class="marca" href="#inicio">
+        <span class="marca__sello" aria-hidden="true">§</span>
+        <span>
+          <span class="marca__nombre">Prestaciones laborales</span>
+          <span class="marca__materia">Derecho Empresarial e Informático</span>
+        </span>
+      </a>
+
+      <p class="lateral__grupo" id="grupo-calculos">Cálculos</p>
+      <ul class="menu" aria-labelledby="grupo-calculos">
+        <li><a href="#inicio"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Inicio</a></li>
+        <li><a href="#liquidacion"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h2M12 11h2M16 11v6M8 15h2M12 15h2M8 18.5h6"/></svg>Calculadora de liquidación</a></li>
+        <li><a href="#renuncia"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 4H6a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h7"/><path d="M10 12h10M17 9l3 3-3 3"/></svg>Renuncia voluntaria</a></li>
+        <li><a href="#despido"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M17 9l4 4M21 9l-4 4"/></svg>Despido injustificado</a></li>
+        <li><a href="#asueto"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M12 12.5l1.2 2.3 2.5.4-1.8 1.7.4 2.5-2.3-1.2-2.3 1.2.4-2.5-1.8-1.7 2.5-.4z"/></svg>Días de asueto</a></li>
+        <li><a href="#descanso"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M10 13.5v4M14 13.5v4"/></svg>Descanso semanal</a></li>
+        <li><a href="#horas-extras"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>Horas extras</a></li>
+      </ul>
+
+      <p class="lateral__grupo" id="grupo-consulta">Consulta</p>
+      <ul class="menu" aria-labelledby="grupo-consulta">
+        <li><a href="#formulas"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 20c1.8 0 2.7-1 3.2-3.8l1.6-8.4c.5-2.8 1.4-3.8 3.2-3.8M8 10.5h8"/></svg>Fórmulas</a></li>
+        <li><a href="#base-legal"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M6 20h12M5 7h14"/><path d="M5 7l-2.5 6a2.5 2.5 0 0 0 5 0zM19 7l-2.5 6a2.5 2.5 0 0 0 5 0z"/></svg>Base legal</a></li>
+      </ul>
+
+      <p class="lateral__pie">Universidad Gerardo Barrios<br>Ingeniería en Sistemas y Redes Informáticas</p>
+    </nav>
+
+    <main id="contenido" class="principal" tabindex="-1">
+      <div class="solo-impresion encabezado-impresion">
+        <p class="encabezado-impresion__titulo">Calculadora de Prestaciones Laborales</p>
+        <p>Legislación Laboral – El Salvador. Universidad Gerardo Barrios, Derecho Empresarial e Informático.</p>
+      </div>
+
+      <section class="vista vista--inicio" id="vista-inicio" data-vista="inicio" aria-labelledby="titulo-inicio">
+        <header class="portada">
+          <h1 id="titulo-inicio" tabindex="-1">Calculadora de Prestaciones Laborales</h1>
+          <p class="portada__subtitulo">Legislación Laboral – El Salvador</p>
+          <p class="portada__texto">Herramienta web para realizar cálculos automatizados de prestaciones laborales y recargos correspondientes según las fórmulas estudiadas en el Bloque 2 de Derecho Empresarial e Informático.</p>
+        </header>
+
+        <a class="acceso-principal" href="#liquidacion">
+          <span class="acceso-principal__cuerpo">
+            <span class="acceso-principal__titulo">Calculadora completa de liquidación</span>
+            <span class="acceso-principal__texto">Vacación, aguinaldo, indemnización o prestación por renuncia, horas extras, asuetos y descanso semanal en un solo cálculo, con el total y el desglose paso a paso.</span>
+          </span>
+          <span class="acceso-principal__accion">Calcular liquidación</span>
+        </a>
+
+        <h2 class="inicio__subtitulo">Cálculos por concepto</h2>
+        <ul class="accesos">
+          <li>
+            <a class="acceso" href="#renuncia">
+              <span class="acceso__titulo">Renuncia voluntaria</span>
+              <span class="acceso__texto">15 días de salario por año, desde 2 años de servicio y con preaviso escrito.</span>
+              <span class="acceso__formula">SBD × 15 × años</span>
+            </a>
+          </li>
+          <li>
+            <a class="acceso" href="#despido">
+              <span class="acceso__titulo">Despido injustificado</span>
+              <span class="acceso__texto">30 días de salario por año y la parte proporcional de la fracción.</span>
+              <span class="acceso__formula">SBM × años + (SBM ÷ 360) × días</span>
+            </a>
+          </li>
+          <li>
+            <a class="acceso" href="#asueto">
+              <span class="acceso__titulo">Días de asueto</span>
+              <span class="acceso__texto">Salario ordinario más un recargo del 100 % por cada asueto trabajado.</span>
+              <span class="acceso__formula">SE = SBD × 2</span>
+            </a>
+          </li>
+          <li>
+            <a class="acceso" href="#descanso">
+              <span class="acceso__titulo">Descanso semanal</span>
+              <span class="acceso__texto">Salario del día más un recargo mínimo del 50 % y un día compensatorio.</span>
+              <span class="acceso__formula">SDD = SBD × 1.5</span>
+            </a>
+          </li>
+          <li>
+            <a class="acceso" href="#horas-extras">
+              <span class="acceso__titulo">Horas extras</span>
+              <span class="acceso__texto">Diurnas con recargo del 100 %; nocturnas con el 25 % adicional de la hora nocturna.</span>
+              <span class="acceso__formula">HE = H × HL × 2</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="inicio__consulta">
+          <p>Todos los cálculos usan mes comercial de 30 días y año comercial de 360 días, como en el material de la asignatura.</p>
+          <div class="inicio__enlaces">
+            <a class="boton boton--secundario" href="#formulas">Ver fórmulas</a>
+            <a class="boton boton--secundario" href="#base-legal">Base legal</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="vista" id="vista-liquidacion" data-vista="liquidacion" aria-labelledby="titulo-liquidacion" hidden>
+        <header class="cabecera">
+          <a class="volver no-imprimir" href="#inicio">Volver al inicio</a>
+          <h1 id="titulo-liquidacion" tabindex="-1">Calculadora de liquidación</h1>
+          <p class="cabecera__texto">Complete los tres bloques. Los conceptos que no correspondan se marcan como «No aplica» y suman $0.00.</p>
+        </header>
+
+        <div class="modulo modulo--ancho">
+          <form class="formulario" id="form-liquidacion" novalidate>
+            <div class="formulario__atajo">
+              <button type="button" class="boton boton--texto" data-ejemplo>Cargar el caso del material (Roberto Herrera)</button>
+            </div>
+
+            <fieldset class="bloque">
+              <legend><span class="bloque__numero">1</span>Datos financieros y antigüedad</legend>
+
+              <div class="campo">
+                <label for="liq-salario">Salario mensual</label>
+                <div class="entrada entrada--dinero"><span aria-hidden="true">$</span><input id="liq-salario" name="salario" type="text" inputmode="decimal" autocomplete="off" required data-tipo="dinero" data-min="0.01" data-max="1000000" data-msg="Ingrese un salario válido." placeholder="600.00"></div>
+                <p class="error" id="liq-salario-error" hidden></p>
+              </div>
+
+              <div class="campo">
+                <span class="campo__etiqueta" id="liq-modo-etiqueta">¿Cómo quiere indicar la antigüedad?</span>
+                <div class="segmentado" role="radiogroup" aria-labelledby="liq-modo-etiqueta">
+                  <input type="radio" id="liq-modo-fechas" name="modo" value="fechas" checked>
+                  <label for="liq-modo-fechas">Con fechas</label>
+                  <input type="radio" id="liq-modo-manual" name="modo" value="manual">
+                  <label for="liq-modo-manual">Con años y meses</label>
+                </div>
+              </div>
+
+              <div class="subgrupo" data-mostrar-si="modo=fechas">
+                <div class="fila-campos">
+                  <div class="campo">
+                    <label for="liq-inicio">Fecha de inicio</label>
+                    <input class="entrada-simple" id="liq-inicio" name="fechaInicio" type="date" required data-tipo="fecha" data-msg-vacio="Ingrese la fecha de inicio de la relación laboral.">
+                    <p class="error" id="liq-inicio-error" hidden></p>
+                  </div>
+                  <div class="campo">
+                    <label for="liq-fin">Último día laborado</label>
+                    <input class="entrada-simple" id="liq-fin" name="fechaFin" type="date" required data-tipo="fecha" data-msg-vacio="Ingrese el último día laborado.">
+                    <p class="error" id="liq-fin-error" hidden></p>
+                  </div>
+                </div>
+                <p class="calculado" id="liq-antiguedad" aria-live="polite" hidden></p>
+                <div class="campo">
+                  <label for="liq-vacaciones">Inicio de sus últimas vacaciones</label>
+                  <input class="entrada-simple" id="liq-vacaciones" name="ultimaVacacion" type="date" data-tipo="fecha">
+                  <p class="ayuda" id="liq-vacaciones-ayuda">Sirve para saber si las vacaciones del último año completo ya se gozaron o se deben pagar completas.</p>
+                  <label class="casilla"><input type="checkbox" name="sinVacaciones" id="liq-sin-vacaciones"> No ha gozado vacaciones con este patrono</label>
+                  <p class="error" id="liq-vacaciones-error" hidden></p>
+                </div>
+              </div>
+
+              <div class="subgrupo" data-mostrar-si="modo=manual" hidden>
+                <div class="fila-campos fila-campos--tres">
+                  <div class="campo">
+                    <label for="liq-anios">Años laborados</label>
+                    <input class="entrada-simple" id="liq-anios" name="anios" type="text" inputmode="numeric" autocomplete="off" required data-tipo="entero" data-min="0" data-max="60" data-msg="Ingrese los años laborados (número entero de 0 a 60)." placeholder="0">
+                    <p class="error" id="liq-anios-error" hidden></p>
+                  </div>
+                  <div class="campo">
+                    <label for="liq-meses">Meses laborados</label>
+                    <input class="entrada-simple" id="liq-meses" name="meses" type="text" inputmode="numeric" autocomplete="off" required data-tipo="entero" data-min="0" data-max="11" data-msg="Los meses deben estar entre 0 y 11." placeholder="0">
+                    <p class="error" id="liq-meses-error" hidden></p>
+                  </div>
+                  <div class="campo">
+                    <label for="liq-dias">Días laborados</label>
+                    <input class="entrada-simple" id="liq-dias" name="dias" type="text" inputmode="numeric" autocomplete="off" data-tipo="entero" data-min="0" data-max="29" data-msg="Los días deben estar entre 0 y 29." placeholder="0">
+                    <p class="error" id="liq-dias-error" hidden></p>
+                  </div>
+                </div>
+                <div class="campo">
+                  <label for="liq-vac-pendiente">¿Tiene pendientes de gozar las vacaciones del último año completo?</label>
+                  <select class="entrada-simple" id="liq-vac-pendiente" name="vacacionPendiente">
+                    <option value="no">No, ya las gozó</option>
+                    <option value="si">Sí, están pendientes</option>
+                  </select>
+                </div>
+                <div class="campo">
+                  <label for="liq-dias-aguinaldo">Días laborados desde el 12 de diciembre anterior</label>
+                  <input class="entrada-simple" id="liq-dias-aguinaldo" name="diasAguinaldo" type="text" inputmode="numeric" autocomplete="off" required data-tipo="entero" data-min="0" data-max="360" data-msg="Ingrese los días para el aguinaldo (número entero de 0 a 360)." placeholder="0" aria-describedby="liq-dias-aguinaldo-ayuda">
+                  <p class="ayuda" id="liq-dias-aguinaldo-ayuda">Meses completos × 30 más los días sueltos. Si ingresó después del 12 de diciembre, cuente desde su fecha de ingreso.</p>
+                  <p class="error" id="liq-dias-aguinaldo-error" hidden></p>
+                </div>
+                <label class="casilla"><input type="checkbox" name="aguinaldoCompleto" id="liq-ag-completo"> La relación termina entre el 1 de octubre y el 11 de diciembre (desde 2026): pagar aguinaldo completo</label>
+              </div>
+
+              <div class="campo">
+                <label for="liq-minimo">Salario mínimo del sector</label>
+                <div class="entrada entrada--dinero"><span aria-hidden="true">$</span><input id="liq-minimo" name="salarioMinimo" type="text" inputmode="decimal" autocomplete="off" required data-tipo="dinero" data-min="1" data-max="100000" data-msg="Ingrese un salario mínimo válido." value="408.80"></div>
+                <p class="ayuda">Comercio, industria y servicios, vigente desde el 1 de junio de 2025. Se usa para los topes de renuncia (2 veces) y despido (4 veces).</p>
+                <p class="error" id="liq-minimo-error" hidden></p>
+              </div>
+            </fieldset>
+
+            <fieldset class="bloque">
+              <legend><span class="bloque__numero">2</span>Causa de finalización de la relación laboral</legend>
+              <div class="opciones-causa" role="radiogroup" aria-labelledby="liq-causa-etiqueta">
+                <span class="campo__etiqueta" id="liq-causa-etiqueta">Tipo de cierre</span>
+                <input type="radio" id="liq-causa-despido" name="causa" value="despido">
+                <label for="liq-causa-despido"><strong>Despido injustificado</strong><span>Indemnización de 30 días de salario por año de servicio.</span></label>
+                <input type="radio" id="liq-causa-renuncia" name="causa" value="renuncia">
+                <label for="liq-causa-renuncia"><strong>Renuncia voluntaria</strong><span>Prestación de 15 días de salario por año, desde 2 años.</span></label>
+              </div>
+              <p class="error" id="form-liquidacion-causa-error" hidden></p>
+
+              <div class="campo" data-mostrar-si="causa=renuncia" hidden>
+                <span class="campo__etiqueta" id="liq-preaviso-etiqueta">¿Informó la renuncia al patrono por escrito, con el preaviso requerido?</span>
+                <div class="segmentado" role="radiogroup" aria-labelledby="liq-preaviso-etiqueta">
+                  <input type="radio" id="liq-preaviso-si" name="preaviso" value="si">
+                  <label for="liq-preaviso-si">Sí</label>
+                  <input type="radio" id="liq-preaviso-no" name="preaviso" value="no">
+                  <label for="liq-preaviso-no">No</label>
+                </div>
+                <p class="ayuda">15 días de anticipación; 30 días en cargos de dirección, jefatura o trabajo especializado.</p>
+                <p class="error" id="form-liquidacion-preaviso-error" hidden></p>
+              </div>
+            </fieldset>
+
+            <fieldset class="bloque">
+              <legend><span class="bloque__numero">3</span>Jornadas extraordinarias y días especiales</legend>
+              <p class="bloque__texto">Acumulados en el período a calcular y todavía no pagados.</p>
+
+              <div class="concepto">
+                <div class="concepto__cabecera">
+                  <span class="campo__etiqueta" id="liq-hed-etiqueta">Horas extras diurnas</span>
+                  <div class="segmentado segmentado--compacto" role="radiogroup" aria-labelledby="liq-hed-etiqueta">
+                    <input type="radio" id="liq-hed-si" name="aplicaHed" value="si"><label for="liq-hed-si">Aplica</label>
+                    <input type="radio" id="liq-hed-no" name="aplicaHed" value="no" checked><label for="liq-hed-no">No aplica</label>
+                  </div>
+                </div>
+                <div class="campo" data-mostrar-si="aplicaHed=si" hidden>
+                  <label for="liq-hed" class="visualmente-oculto">Total de horas extras diurnas</label>
+                  <div class="entrada entrada--sufijo"><input id="liq-hed" name="horasDiurnas" type="text" inputmode="decimal" autocomplete="off" required data-tipo="decimal" data-min="0.01" data-max="2000" data-msg="Ingrese las horas extras diurnas (mayor que 0, hasta 2 decimales)." placeholder="0"><span aria-hidden="true">horas</span></div>
+                  <p class="error" id="liq-hed-error" hidden></p>
+                </div>
+              </div>
+
+              <div class="concepto">
+                <div class="concepto__cabecera">
+                  <span class="campo__etiqueta" id="liq-hen-etiqueta">Horas extras nocturnas <small>(7:00 p. m. a 6:00 a. m.)</small></span>
+                  <div class="segmentado segmentado--compacto" role="radiogroup" aria-labelledby="liq-hen-etiqueta">
+                    <input type="radio" id="liq-hen-si" name="aplicaHen" value="si"><label for="liq-hen-si">Aplica</label>
+                    <input type="radio" id="liq-hen-no" name="aplicaHen" value="no" checked><label for="liq-hen-no">No aplica</label>
+                  </div>
+                </div>
+                <div class="campo" data-mostrar-si="aplicaHen=si" hidden>
+                  <label for="liq-hen" class="visualmente-oculto">Total de horas extras nocturnas</label>
+                  <div class="entrada entrada--sufijo"><input id="liq-hen" name="horasNocturnas" type="text" inputmode="decimal" autocomplete="off" required data-tipo="decimal" data-min="0.01" data-max="2000" data-msg="Ingrese las horas extras nocturnas (mayor que 0, hasta 2 decimales)." placeholder="0"><span aria-hidden="true">horas</span></div>
+                  <p class="error" id="liq-hen-error" hidden></p>
+                </div>
+              </div>
+
+              <div class="concepto concepto--auxiliar">
+                <div class="campo">
+                  <label for="liq-jornada">Horas de la jornada ordinaria</label>
+                  <div class="entrada entrada--sufijo entrada--corta"><input id="liq-jornada" name="horasJornada" type="text" inputmode="decimal" autocomplete="off" required data-tipo="decimal" data-min="1" data-max="12" data-msg="La jornada debe estar entre 1 y 12 horas." value="8"><span aria-hidden="true">horas</span></div>
+                  <p class="ayuda">Para obtener el valor de la hora ordinaria: salario diario ÷ horas de la jornada.</p>
+                  <p class="error" id="liq-jornada-error" hidden></p>
+                </div>
+                <button type="button" class="boton boton--secundario" data-abrir-horas data-objetivo-diurnas="liq-hed" data-objetivo-nocturnas="liq-hen" data-aplica-diurnas="aplicaHed" data-aplica-nocturnas="aplicaHen">Registrar horas por fecha y hora</button>
+              </div>
+
+              <div class="concepto">
+                <div class="concepto__cabecera">
+                  <span class="campo__etiqueta" id="liq-asu-etiqueta">Días de asueto laborados</span>
+                  <div class="segmentado segmentado--compacto" role="radiogroup" aria-labelledby="liq-asu-etiqueta">
+                    <input type="radio" id="liq-asu-si" name="aplicaAsueto" value="si"><label for="liq-asu-si">Aplica</label>
+                    <input type="radio" id="liq-asu-no" name="aplicaAsueto" value="no" checked><label for="liq-asu-no">No aplica</label>
+                  </div>
+                </div>
+                <div class="campo" data-mostrar-si="aplicaAsueto=si" hidden>
+                  <label for="liq-asueto" class="visualmente-oculto">Cantidad de días de asueto laborados</label>
+                  <div class="con-accion">
+                    <div class="entrada entrada--sufijo"><input id="liq-asueto" name="diasAsueto" type="text" inputmode="numeric" autocomplete="off" required data-tipo="entero" data-min="1" data-max="365" data-msg="Ingrese los días de asueto laborados (número entero, 1 o más)." placeholder="0"><span aria-hidden="true">días</span></div>
+                    <button type="button" class="boton boton--secundario" data-abrir-asuetos="liq-asueto">Elegir de la lista</button>
+                  </div>
+                  <p class="error" id="liq-asueto-error" hidden></p>
+                </div>
+              </div>
+
+              <div class="concepto">
+                <div class="concepto__cabecera">
+                  <span class="campo__etiqueta" id="liq-des-etiqueta">Días de descanso semanal laborados</span>
+                  <div class="segmentado segmentado--compacto" role="radiogroup" aria-labelledby="liq-des-etiqueta">
+                    <input type="radio" id="liq-des-si" name="aplicaDescanso" value="si"><label for="liq-des-si">Aplica</label>
+                    <input type="radio" id="liq-des-no" name="aplicaDescanso" value="no" checked><label for="liq-des-no">No aplica</label>
+                  </div>
+                </div>
+                <div class="campo" data-mostrar-si="aplicaDescanso=si" hidden>
+                  <label for="liq-descanso" class="visualmente-oculto">Cantidad de días de descanso semanal laborados</label>
+                  <div class="entrada entrada--sufijo"><input id="liq-descanso" name="diasDescanso" type="text" inputmode="numeric" autocomplete="off" required data-tipo="entero" data-min="1" data-max="365" data-msg="Ingrese los días de descanso laborados (número entero, 1 o más)." placeholder="0"><span aria-hidden="true">días</span></div>
+                  <p class="error" id="liq-descanso-error" hidden></p>
+                </div>
+              </div>
+            </fieldset>
+
+            <details class="opciones">
+              <summary>Opciones de cálculo</summary>
+              <div class="opciones__cuerpo">
+                <div class="campo">
+                  <span class="campo__etiqueta" id="liq-precision-etiqueta">Precisión de vacación y aguinaldo proporcional</span>
+                  <div class="segmentado" role="radiogroup" aria-labelledby="liq-precision-etiqueta">
+                    <input type="radio" id="liq-precision-exacta" name="modoRedondeo" value="exacto" checked><label for="liq-precision-exacta">Exacta</label>
+                    <input type="radio" id="liq-precision-material" name="modoRedondeo" value="material"><label for="liq-precision-material">Como el material</label>
+                  </div>
+                  <p class="ayuda">«Como el material» trunca los factores diarios a 3 decimales, igual que el caso Roberto Herrera ($4,647.31).</p>
+                </div>
+                <label class="casilla"><input type="checkbox" name="aplicarReforma" checked> Aplicar la reforma de septiembre de 2026: aguinaldo completo si la relación termina entre el 1 de octubre y el 11 de diciembre</label>
+                <label class="casilla"><input type="checkbox" name="descuentos" id="liq-descuentos" checked> Restar AFP e ISSS (indicación de clase)</label>
+                <div class="subgrupo" data-mostrar-si="descuentos=on">
+                  <div class="fila-campos">
+                    <div class="campo">
+                      <label for="liq-afp">AFP</label>
+                      <div class="entrada entrada--sufijo entrada--corta"><input id="liq-afp" name="tasaAFP" type="text" inputmode="decimal" autocomplete="off" required data-tipo="decimal" data-min="0" data-max="100" data-msg="Ingrese un porcentaje de AFP entre 0 y 100." value="7.25"><span aria-hidden="true">%</span></div>
+                      <p class="error" id="liq-afp-error" hidden></p>
+                    </div>
+                    <div class="campo">
+                      <label for="liq-isss">ISSS</label>
+                      <div class="entrada entrada--sufijo entrada--corta"><input id="liq-isss" name="tasaISSS" type="text" inputmode="decimal" autocomplete="off" required data-tipo="decimal" data-min="0" data-max="100" data-msg="Ingrese un porcentaje de ISSS entre 0 y 100." value="3"><span aria-hidden="true">%</span></div>
+                      <p class="error" id="liq-isss-error" hidden></p>
+                    </div>
+                  </div>
+                  <div class="campo">
+                    <label for="liq-base-desc">Aplicar los descuentos sobre</label>
+                    <select class="entrada-simple" id="liq-base-desc" name="baseDescuento">
+                      <option value="indemnizacion">La indemnización o prestación por renuncia</option>
+                      <option value="total">El total de la liquidación</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </details>
+
+            <div class="acciones">
+              <button type="submit" class="boton boton--primario">Calcular liquidación</button>
+              <button type="reset" class="boton boton--secundario">Limpiar formulario</button>
+              <button type="button" class="boton boton--texto" data-abrir-formulas="sbd,rv,vp,pa,ap,despido,renuncia,he,hen,se,sdd,total,descuentos">Ver fórmulas</button>
+              <a class="boton boton--texto" href="#base-legal">Base legal</a>
+            </div>
+          </form>
+
+          <div class="resultado" id="res-liquidacion" aria-live="polite">
+            <div class="vacio">
+              <p class="vacio__titulo">La liquidación aparecerá aquí</p>
+              <p>Complete los tres bloques y pulse «Calcular liquidación» para ver cada concepto, el total y cómo se calculó.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="vista" id="vista-renuncia" data-vista="renuncia" aria-labelledby="titulo-renuncia" hidden>
+        <header class="cabecera">
+          <a class="volver no-imprimir" href="#inicio">Volver al inicio</a>
+          <h1 id="titulo-renuncia" tabindex="-1">Renuncia voluntaria</h1>
+          <p class="cabecera__texto">Prestación económica de la Ley Reguladora de la Prestación Económica por Renuncia Voluntaria (2014), Arts. 2 y 4.</p>
+        </header>
+        <div class="modulo">
+          <form class="formulario" id="form-renuncia" novalidate>
+            <fieldset class="bloque">
+              <legend>Datos del trabajador</legend>
+              <div class="campo">
+                <label for="ren-salario">Salario mensual</label>
+                <div class="entrada entrada--dinero"><span aria-hidden="true">$</span><input id="ren-salario" name="salario" type="text" inputmode="decimal" autocomplete="off" required data-tipo="dinero" data-min="0.01" data-max="1000000" data-msg="Ingrese un salario válido." placeholder="600.00"></div>
+                <p class="error" id="ren-salario-error" hidden></p>
+              </div>
+              <div class="fila-campos">
+                <div class="campo">
+                  <label for="ren-anios">Años laborados</label>
+                  <input class="entrada-simple" id="ren-anios" name="anios" type="text" inputmode="numeric" autocomplete="off" required data-tipo="entero" data-min="0" data-max="60" data-msg="Ingrese los años laborados (número entero de 0 a 60)." placeholder="0">
+                  <p class="error" id="ren-anios-error" hidden></p>
+                </div>
+                <div class="campo">
+                  <label for="ren-meses">Meses laborados</label>
+                  <input class="entrada-simple" id="ren-meses" name="meses" type="text" inputmode="numeric" autocomplete="off" data-tipo="entero" data-min="0" data-max="11" data-msg="Los meses deben estar entre 0 y 11." placeholder="0">
+                  <p class="error" id="ren-meses-error" hidden></p>
+                </div>
+              </div>
+              <div class="campo">
+                <span class="campo__etiqueta" id="ren-preaviso-etiqueta">¿Informó la renuncia al patrono por escrito, con el preaviso requerido?</span>
+                <div class="segmentado" role="radiogroup" aria-labelledby="ren-preaviso-etiqueta">
+                  <input type="radio" id="ren-preaviso-si" name="preaviso" value="si"><label for="ren-preaviso-si">Sí</label>
+                  <input type="radio" id="ren-preaviso-no" name="preaviso" value="no"><label for="ren-preaviso-no">No</label>
+                </div>
+                <p class="ayuda">15 días de anticipación; 30 días en cargos de dirección, jefatura o trabajo especializado.</p>
+                <p class="error" id="form-renuncia-preaviso-error" hidden></p>
+              </div>
+              <div class="campo">
+                <label for="ren-minimo">Salario mínimo del sector</label>
+                <div class="entrada entrada--dinero"><span aria-hidden="true">$</span><input id="ren-minimo" name="salarioMinimo" type="text" inputmode="decimal" autocomplete="off" required data-tipo="dinero" data-min="1" data-max="100000" data-msg="Ingrese un salario mínimo válido." value="408.80"></div>
+                <p class="ayuda">Ningún salario se considera mayor a 2 veces este valor.</p>
+                <p class="error" id="ren-minimo-error" hidden></p>
+              </div>
+            </fieldset>
+            <div class="acciones">
+              <button type="submit" class="boton boton--primario">Calcular</button>
+              <button type="reset" class="boton boton--secundario">Limpiar formulario</button>
+              <button type="button" class="boton boton--texto" data-abrir-formulas="sbd,renuncia">Ver fórmulas</button>
+              <a class="boton boton--texto" href="#base-legal">Base legal</a>
+            </div>
+          </form>
+          <div class="resultado" id="res-renuncia" aria-live="polite">
+            <div class="vacio">
+              <p class="vacio__titulo">Sin cálculo todavía</p>
+              <p>Ingrese el salario, la antigüedad y si presentó el preaviso. Se verificarán los requisitos y se mostrará cada operación.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="vista" id="vista-despido" data-vista="despido" aria-labelledby="titulo-despido" hidden>
+        <header class="cabecera">
+          <a class="volver no-imprimir" href="#inicio">Volver al inicio</a>
+          <h1 id="titulo-despido" tabindex="-1">Despido injustificado</h1>
+          <p class="cabecera__texto">Indemnización del Art. 58 del Código de Trabajo: 30 días de salario básico por cada año de servicio y proporcionalmente por las fracciones de año.</p>
+        </header>
+        <div class="modulo">
+          <form class="formulario" id="form-despido" novalidate>
+            <fieldset class="bloque">
+              <legend>Datos del trabajador</legend>
+              <div class="campo">
+                <label for="des-salario">Salario mensual</label>
+                <div class="entrada entrada--dinero"><span aria-hidden="true">$</span><input id="des-salario" name="salario" type="text" inputmode="decimal" autocomplete="off" required data-tipo="dinero" data-min="0.01" data-max="1000000" data-msg="Ingrese un salario válido." placeholder="600.00"></div>
+                <p class="error" id="des-salario-error" hidden></p>
+              </div>
+              <div class="fila-campos fila-campos--tres">
+                <div class="campo">
+                  <label for="des-anios">Años laborados</label>
+                  <input class="entrada-simple" id="des-anios" name="anios" type="text" inputmode="numeric" autocomplete="off" required data-tipo="entero" data-min="0" data-max="60" data-msg="Ingrese los años laborados (número entero de 0 a 60)." placeholder="0">
+                  <p class="error" id="des-anios-error" hidden></p>
+                </div>
+                <div class="campo">
+                  <label for="des-meses">Meses laborados</label>
+                  <input class="entrada-simple" id="des-meses" name="meses" type="text" inputmode="numeric" autocomplete="off" required data-tipo="entero" data-min="0" data-max="11" data-msg="Los meses deben estar entre 0 y 11." placeholder="0">
+                  <p class="error" id="des-meses-error" hidden></p>
+                </div>
+                <div class="campo">
+                  <label for="des-dias">Días laborados</label>
+                  <input class="entrada-simple" id="des-dias" name="dias" type="text" inputmode="numeric" autocomplete="off" data-tipo="entero" data-min="0" data-max="29" data-msg="Los días deben estar entre 0 y 29." placeholder="0">
+                  <p class="error" id="des-dias-error" hidden></p>
+                </div>
+              </div>
+              <div class="campo">
+                <label for="des-minimo">Salario mínimo legal vigente</label>
+                <div class="entrada entrada--dinero"><span aria-hidden="true">$</span><input id="des-minimo" name="salarioMinimo" type="text" inputmode="decimal" autocomplete="off" required data-tipo="dinero" data-min="1" data-max="100000" data-msg="Ingrese un salario mínimo válido." value="408.80"></div>
+                <p class="ayuda">Ningún salario se considera mayor a 4 veces este valor.</p>
+                <p class="error" id="des-minimo-error" hidden></p>
+              </div>
+              <label class="casilla"><input type="checkbox" name="descuentos" checked> Restar AFP (7.25 %) e ISSS (3 %) a la indemnización (indicación de clase)</label>
+            </fieldset>
+            <div class="acciones">
+              <button type="submit" class="boton boton--primario">Calcular</button>
+              <button type="reset" class="boton boton--secundario">Limpiar formulario</button>
+              <button type="button" class="boton boton--texto" data-abrir-formulas="sbd,despido,descuentos">Ver fórmulas</button>
+              <a class="boton boton--texto" href="#base-legal">Base legal</a>
+            </div>
+          </form>
+          <div class="resultado" id="res-despido" aria-live="polite">
+            <div class="vacio">
+              <p class="vacio__titulo">Sin cálculo todavía</p>
+              <p>Ingrese el salario y el tiempo de servicio. Se mostrarán los años completos, la conversión de meses a días y la parte proporcional.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="vista" id="vista-asueto" data-vista="asueto" aria-labelledby="titulo-asueto" hidden>
+        <header class="cabecera">
+          <a class="volver no-imprimir" href="#inicio">Volver al inicio</a>
+          <h1 id="titulo-asueto" tabindex="-1">Días de asueto laborados</h1>
+          <p class="cabecera__texto">Trabajar en un día de asueto genera el salario ordinario más un recargo del 100 %.</p>
+        </header>
+        <div class="modulo">
+          <form class="formulario" id="form-asueto" novalidate>
+            <fieldset class="bloque">
+              <legend>Datos del cálculo</legend>
+              <div class="campo">
+                <label for="asu-salario">Salario mensual</label>
+                <div class="entrada entrada--dinero"><span aria-hidden="true">$</span><input id="asu-salario" name="salario" type="text" inputmode="decimal" autocomplete="off" required data-tipo="dinero" data-min="0.01" data-max="1000000" data-msg="Ingrese un salario válido." placeholder="600.00"></div>
+                <p class="error" id="asu-salario-error" hidden></p>
+              </div>
+              <div class="campo">
+                <label for="asu-dias">Días de asueto trabajados</label>
+                <div class="con-accion">
+                  <div class="entrada entrada--sufijo"><input id="asu-dias" name="dias" type="text" inputmode="numeric" autocomplete="off" required data-tipo="entero" data-min="1" data-max="365" data-msg="Ingrese los días de asueto trabajados (número entero, 1 o más)." placeholder="0"><span aria-hidden="true">días</span></div>
+                  <button type="button" class="boton boton--secundario" data-abrir-asuetos="asu-dias">Elegir de la lista</button>
+                </div>
+                <p class="error" id="asu-dias-error" hidden></p>
+              </div>
+            </fieldset>
+            <div class="acciones">
+              <button type="submit" class="boton boton--primario">Calcular</button>
+              <button type="reset" class="boton boton--secundario">Limpiar formulario</button>
+              <button type="button" class="boton boton--texto" data-abrir-formulas="sbd,se">Ver fórmulas</button>
+              <a class="boton boton--texto" href="#base-legal">Base legal</a>
+            </div>
+          </form>
+          <div class="resultado" id="res-asueto" aria-live="polite">
+            <div class="vacio">
+              <p class="vacio__titulo">Sin cálculo todavía</p>
+              <p>Indique el salario y cuántos asuetos trabajó, o elíjalos de la lista oficial de asuetos.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="vista" id="vista-descanso" data-vista="descanso" aria-labelledby="titulo-descanso" hidden>
+        <header class="cabecera">
+          <a class="volver no-imprimir" href="#inicio">Volver al inicio</a>
+          <h1 id="titulo-descanso" tabindex="-1">Días de descanso semanal laborados</h1>
+          <p class="cabecera__texto">Trabajar el día de descanso semanal da derecho al salario de ese día más un recargo mínimo del 50 %.</p>
+        </header>
+        <div class="modulo">
+          <form class="formulario" id="form-descanso" novalidate>
+            <fieldset class="bloque">
+              <legend>Datos del cálculo</legend>
+              <div class="campo">
+                <label for="dsc-salario">Salario mensual</label>
+                <div class="entrada entrada--dinero"><span aria-hidden="true">$</span><input id="dsc-salario" name="salario" type="text" inputmode="decimal" autocomplete="off" required data-tipo="dinero" data-min="0.01" data-max="1000000" data-msg="Ingrese un salario válido." placeholder="450.00"></div>
+                <p class="error" id="dsc-salario-error" hidden></p>
+              </div>
+              <div class="campo">
+                <label for="dsc-dias">Días de descanso semanal trabajados</label>
+                <div class="entrada entrada--sufijo"><input id="dsc-dias" name="dias" type="text" inputmode="numeric" autocomplete="off" required data-tipo="entero" data-min="1" data-max="365" data-msg="Ingrese los días de descanso trabajados (número entero, 1 o más)." placeholder="0"><span aria-hidden="true">días</span></div>
+                <p class="error" id="dsc-dias-error" hidden></p>
+              </div>
+            </fieldset>
+            <div class="acciones">
+              <button type="submit" class="boton boton--primario">Calcular</button>
+              <button type="reset" class="boton boton--secundario">Limpiar formulario</button>
+              <button type="button" class="boton boton--texto" data-abrir-formulas="sbd,sdd">Ver fórmulas</button>
+              <a class="boton boton--texto" href="#base-legal">Base legal</a>
+            </div>
+          </form>
+          <div class="resultado" id="res-descanso" aria-live="polite">
+            <div class="vacio">
+              <p class="vacio__titulo">Sin cálculo todavía</p>
+              <p>Indique el salario y cuántos días de descanso semanal trabajó.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="vista" id="vista-horas-extras" data-vista="horas-extras" aria-labelledby="titulo-horas" hidden>
+        <header class="cabecera">
+          <a class="volver no-imprimir" href="#inicio">Volver al inicio</a>
+          <h1 id="titulo-horas" tabindex="-1">Horas extras</h1>
+          <p class="cabecera__texto">Las horas extraordinarias llevan un recargo del 100 %. Las nocturnas, entre 7:00 p. m. y 6:00 a. m., parten de una hora con 25 % de recargo.</p>
+        </header>
+        <div class="modulo">
+          <form class="formulario" id="form-horas" novalidate>
+            <fieldset class="bloque">
+              <legend>Datos del cálculo</legend>
+              <div class="campo">
+                <label for="hx-salario">Salario mensual</label>
+                <div class="entrada entrada--dinero"><span aria-hidden="true">$</span><input id="hx-salario" name="salario" type="text" inputmode="decimal" autocomplete="off" required data-tipo="dinero" data-min="0.01" data-max="1000000" data-msg="Ingrese un salario válido." placeholder="720.00"></div>
+                <p class="error" id="hx-salario-error" hidden></p>
+              </div>
+              <div class="campo">
+                <label for="hx-jornada">Horas de la jornada ordinaria</label>
+                <div class="entrada entrada--sufijo entrada--corta"><input id="hx-jornada" name="horasJornada" type="text" inputmode="decimal" autocomplete="off" required data-tipo="decimal" data-min="1" data-max="12" data-msg="La jornada debe estar entre 1 y 12 horas." value="8"><span aria-hidden="true">horas</span></div>
+                <p class="ayuda">La jornada diurna tiene un máximo de 8 horas diarias (Art. 161).</p>
+                <p class="error" id="hx-jornada-error" hidden></p>
+              </div>
+              <div class="fila-campos">
+                <div class="campo">
+                  <label for="hx-diurnas">Horas extras diurnas</label>
+                  <div class="entrada entrada--sufijo"><input id="hx-diurnas" name="diurnas" type="text" inputmode="decimal" autocomplete="off" data-tipo="decimal" data-min="0" data-max="2000" data-msg="Ingrese las horas diurnas (0 o más, hasta 2 decimales)." placeholder="0"><span aria-hidden="true">horas</span></div>
+                  <p class="error" id="hx-diurnas-error" hidden></p>
+                </div>
+                <div class="campo">
+                  <label for="hx-nocturnas">Horas extras nocturnas</label>
+                  <div class="entrada entrada--sufijo"><input id="hx-nocturnas" name="nocturnas" type="text" inputmode="decimal" autocomplete="off" data-tipo="decimal" data-min="0" data-max="2000" data-msg="Ingrese las horas nocturnas (0 o más, hasta 2 decimales)." placeholder="0"><span aria-hidden="true">horas</span></div>
+                  <p class="error" id="hx-nocturnas-error" hidden></p>
+                </div>
+              </div>
+              <button type="button" class="boton boton--secundario" data-abrir-horas data-objetivo-diurnas="hx-diurnas" data-objetivo-nocturnas="hx-nocturnas">Registrar horas por fecha y hora</button>
+            </fieldset>
+            <div class="acciones">
+              <button type="submit" class="boton boton--primario">Calcular</button>
+              <button type="reset" class="boton boton--secundario">Limpiar formulario</button>
+              <button type="button" class="boton boton--texto" data-abrir-formulas="sbd,h,he,hn,hen">Ver fórmulas</button>
+              <a class="boton boton--texto" href="#base-legal">Base legal</a>
+            </div>
+          </form>
+          <div class="resultado" id="res-horas" aria-live="polite">
+            <div class="vacio">
+              <p class="vacio__titulo">Sin cálculo todavía</p>
+              <p>Ingrese las horas extras diurnas, nocturnas o ambas. También puede registrarlas por fecha y hora para que la aplicación las clasifique.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="vista" id="vista-formulas" data-vista="formulas" aria-labelledby="titulo-formulas" hidden>
+        <header class="cabecera">
+          <a class="volver no-imprimir" href="#inicio">Volver al inicio</a>
+          <h1 id="titulo-formulas" tabindex="-1">Fórmulas</h1>
+          <p class="cabecera__texto">Cada fórmula indica de dónde sale: del material de la asignatura, derivada de él, de la clase o de una fuente externa.</p>
+        </header>
+        <div id="catalogo-formulas"></div>
+        <section class="criterios" aria-labelledby="titulo-criterios">
+          <h2 id="titulo-criterios">Criterios de cálculo</h2>
+          <ul id="lista-criterios"></ul>
+        </section>
+      </section>
+
+      <section class="vista" id="vista-base-legal" data-vista="base-legal" aria-labelledby="titulo-legal" hidden>
+        <header class="cabecera">
+          <a class="volver no-imprimir" href="#inicio">Volver al inicio</a>
+          <h1 id="titulo-legal" tabindex="-1">Fundamento legal</h1>
+          <p class="cabecera__texto">Normas y artículos citados en el material de estudio. Lo que proviene de otra fuente se identifica como tal.</p>
+        </header>
+        <div id="catalogo-legal"></div>
+        <section class="criterios" aria-labelledby="titulo-fuentes">
+          <h2 id="titulo-fuentes">Fuentes consultadas</h2>
+          <ul id="lista-fuentes"></ul>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <dialog class="dialogo" id="dlg-formulas" aria-labelledby="dlg-formulas-titulo">
+    <div class="dialogo__cabecera">
+      <h2 id="dlg-formulas-titulo">Fórmulas utilizadas</h2>
+      <button type="button" class="dialogo__cerrar" data-cerrar-dialogo aria-label="Cerrar">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="dialogo__cuerpo" id="dlg-formulas-cuerpo"></div>
+    <div class="dialogo__pie">
+      <a class="boton boton--texto" href="#formulas" data-cerrar-dialogo>Ver todas las fórmulas</a>
+      <button type="button" class="boton boton--primario" data-cerrar-dialogo>Cerrar</button>
+    </div>
+  </dialog>
+
+  <dialog class="dialogo" id="dlg-asuetos" aria-labelledby="dlg-asuetos-titulo">
+    <div class="dialogo__cabecera">
+      <h2 id="dlg-asuetos-titulo">¿Qué asuetos trabajó?</h2>
+      <button type="button" class="dialogo__cerrar" data-cerrar-dialogo aria-label="Cerrar">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="dialogo__cuerpo">
+      <p>Marque cada asueto trabajado. Si trabajó el mismo asueto en varios años del período, indique cuántas veces.</p>
+      <ul class="asuetos" id="lista-asuetos"></ul>
+      <p class="error" id="asuetos-error" hidden></p>
+    </div>
+    <div class="dialogo__pie">
+      <p class="dialogo__resumen" id="asuetos-cuenta" aria-live="polite">0 días seleccionados</p>
+      <button type="button" class="boton boton--primario" id="asuetos-aplicar">Usar selección</button>
+    </div>
+  </dialog>
+
+  <dialog class="dialogo dialogo--ancho" id="dlg-horas" aria-labelledby="dlg-horas-titulo">
+    <div class="dialogo__cabecera">
+      <h2 id="dlg-horas-titulo">Registrar horas extras no pagadas</h2>
+      <button type="button" class="dialogo__cerrar" data-cerrar-dialogo aria-label="Cerrar">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="dialogo__cuerpo">
+      <p>Indique cada día con horas extras. La aplicación separa las horas diurnas (6:00 a. m. a 7:00 p. m.) de las nocturnas (7:00 p. m. a 6:00 a. m.). Si la hora final es menor que la inicial, se entiende que terminó al día siguiente.</p>
+      <div class="registro" id="registro-horas"></div>
+      <button type="button" class="boton boton--secundario" id="horas-agregar">Agregar otro día</button>
+      <p class="error" id="horas-error" hidden></p>
+    </div>
+    <div class="dialogo__pie">
+      <p class="dialogo__resumen" id="horas-resumen" aria-live="polite">0 horas diurnas y 0 horas nocturnas</p>
+      <button type="button" class="boton boton--primario" id="horas-aplicar">Usar estas horas</button>
+    </div>
+  </dialog>
+
+  <script src="calculos.js"></script>
+  <script src="contenido.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
